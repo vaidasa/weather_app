@@ -2,34 +2,22 @@
 
 namespace App\Controller;
 
-use App\GoogleApi\WeatherService;
 use App\Model\NullWeather;
+use App\Weather\LoaderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class WeatherController extends AbstractController
 {
-
-    /** @var WeatherService */
-    private $weatherService;
-
     /**
-     * WeatherController constructor.
-     * @param WeatherService $weatherService
-     */
-    public function __construct(WeatherService $weatherService)
-    {
-        $this->weatherService = $weatherService;
-    }
-
-    /**
-     * @param  $day
+     * @param               $day
+     * @param LoaderService $weatherLoaderService
      * @return Response
      */
-    public function index($day): Response
+    public function index($day, LoaderService $weatherLoaderService): Response
     {
         try {
-            $weather = $this->weatherService->getDay(new \DateTime($day));
+            $weather = $weatherLoaderService->loadWeatherByDay(new \DateTime($day));
         } catch (\Exception $exp) {
             $weather = new NullWeather();
         }
