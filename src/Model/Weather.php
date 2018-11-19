@@ -26,6 +26,11 @@ class Weather
     protected $date;
 
     /**
+     * @var string
+     */
+    protected $provider;
+
+    /**
      * @return int
      */
     public function getDayTemp(): int
@@ -87,5 +92,21 @@ class Weather
     public function setDate(\DateTime $date): void
     {
         $this->date = $date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProvider(): string
+    {
+        return $this->provider;
+    }
+
+    /**
+     * @param string $provider
+     */
+    public function setProvider(string $provider): void
+    {
+        $this->provider = $provider;
     }
 }

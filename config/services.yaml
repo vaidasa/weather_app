@@ -1,5 +1,6 @@
 imports:
-    - { resource: services/googleApi.yaml}
+    - { resource: services/externalApi/yahoo.yaml}
+    - { resource: services/externalApi/google.yaml}
     - { resource: services/weather.yaml}
 
 # This file is the entry point to configure your own services.
