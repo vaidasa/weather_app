@@ -15,5 +15,5 @@ services:
         class: App\Weather\LoaderService
         public: true
         arguments:
-            - ''   #create google api  weather service
+            - '@app.google_api.weather_service'
             - '@app.weather.file_system_cache'
