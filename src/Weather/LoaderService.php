@@ -2,7 +2,7 @@
 
 namespace App\Weather;
 
-use App\GoogleApi\WeatherService;
+use App\ExternalApi\Google\WeatherService;
 use App\Model\Weather;
 use Symfony\Component\Cache\Simple\FilesystemCache;
 
