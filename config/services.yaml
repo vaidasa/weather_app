@@ -35,3 +35,7 @@ services:
 
     App\GoogleApi\WeatherService:
         public: true
+
+    App\Controller\WeatherController:
+        bind:
+            $weatherLoaderService: '@app.weather.loader_service'
