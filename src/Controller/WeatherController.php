@@ -13,6 +13,7 @@ class WeatherController extends AbstractController
      * @param               $day
      * @param LoaderService $weatherLoaderService
      * @return Response
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function index($day, LoaderService $weatherLoaderService): Response
     {
@@ -24,10 +25,11 @@ class WeatherController extends AbstractController
 
         return $this->render('weather/index.html.twig', [
             'weatherData' => [
-                'date'      => $weather->getDate()->format('Y-m-d'),
+                'date'      => $weather->getDate()->format('Y-m-d l'),
                 'dayTemp'   => $weather->getDayTemp(),
                 'nightTemp' => $weather->getNightTemp(),
-                'sky'       => $weather->getSky()
+                'sky'       => $weather->getSky(),
+                'provider'  => $weather->getProvider()
             ],
         ]);
     }
