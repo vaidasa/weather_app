@@ -4,18 +4,19 @@ namespace App\Controller;
 
 use App\Model\NullWeather;
 use App\Weather\LoaderService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class WeatherController extends AbstractController
+class WeatherController extends Controller
 {
     /**
      * @param               $day
      * @param LoaderService $weatherLoaderService
      * @return Response
      */
-    public function index($day, LoaderService $weatherLoaderService): Response
+    public function index($day): Response
     {
+        $weatherLoaderService = $this->container->get('app.weather.loader_service');
         try {
             $weather = $weatherLoaderService->loadWeatherByDay(new \DateTime($day));
         } catch (\Exception $exp) {
