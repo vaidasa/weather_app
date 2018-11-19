@@ -2,44 +2,42 @@
 
 namespace App\Weather;
 
-use App\ExternalApi\Google\WeatherService;
 use App\Model\Weather;
 use Symfony\Component\Cache\Simple\FilesystemCache;
+use Psr\SimpleCache\InvalidArgumentException;
 
 class LoaderService
 {
-    /** @var WeatherService */
-    private $googleWeatherService;
-
     /** @var FilesystemCache */
     private $cacheService;
 
+    /** @var ProviderServiceManager */
+    private $providerServiceManager;
+
     /**
      * LoaderService constructor.
-     * @param WeatherService  $googleWeatherService
-     * @param FilesystemCache $cacheService
+     * @param ProviderServiceManager $providerServiceManager
+     * @param FilesystemCache        $cacheService
      */
-    public function __construct(WeatherService $googleWeatherService, FilesystemCache $cacheService)
+    public function __construct(ProviderServiceManager $providerServiceManager, FilesystemCache $cacheService)
     {
-        $this->googleWeatherService = $googleWeatherService;
+        $this->providerServiceManager = $providerServiceManager;
         $this->cacheService = $cacheService;
     }
 
     /**
      * @param \DateTime $day
      * @return Weather
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      * @throws \Exception
      */
     public function loadWeatherByDay(\DateTime $day): Weather
     {
         $cacheKey = $this->getCacheKey($day);
         if ($this->cacheService->has($cacheKey)) {
-            echo 'from cache';
             $weather = $this->cacheService->get($cacheKey);
         } else {
-            echo 'save cache';
-            $weather = $this->googleWeatherService->getDay($day);
+            $weather = $this->providerServiceManager->getWeatherProvider($day)->getDay($day);
             $this->cacheService->set($cacheKey, $weather);
         }
 
@@ -50,7 +48,7 @@ class LoaderService
      * @param \DateTime $day
      * @return string
      */
-    private function getCacheKey($day): string
+    private function getCacheKey(\DateTime $day): string
     {
         return $day->format('Y-m-d');
     }

@@ -15,5 +15,11 @@ services:
         class: App\Weather\LoaderService
         public: true
         arguments:
-            - '@app.external_api.google.weather_service'
+            - '@app.weather.provider_service_manager'
             - '@app.weather.file_system_cache'
+
+    app.weather.provider_service_manager:
+      class: App\Weather\ProviderServiceManager
+      calls:
+          - [addWeatherProvider, ['google', '@app.external_api.google.weather_service']]
+          - [addWeatherProvider, ['yahoo', '@app.external_api.yahoo.weather_service']]
