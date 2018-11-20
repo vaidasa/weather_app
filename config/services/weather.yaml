@@ -10,3 +10,9 @@ services:
             $namespace: '%weather_cache_namespace%'
             $defaultLifetime: '%weather_cache_default_life_time%'
             $directory: '%weather_cache_directory%'
+
+    app.weahter.loader_service:
+        class: App\Weather\LoaderService
+        arguments:
+            - '@app.google_api.weather_service'
+            - '@app.weather.file_system_cache'
