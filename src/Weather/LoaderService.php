@@ -16,7 +16,8 @@ class LoaderService
 
     /**
      * LoaderService constructor.
-     * @param WeatherService $weatherService
+     * @param WeatherService  $weatherService
+     * @param FilesystemCache $cacheService
      */
     public function __construct(WeatherService $weatherService, FilesystemCache $cacheService)
     {
