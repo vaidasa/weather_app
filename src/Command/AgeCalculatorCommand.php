@@ -2,6 +2,8 @@
 
 namespace App\Command;
 
+use App\AgeCalculator\AgeCalculator;
+use App\AgeCalculator\AgeCalculatorManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,29 +14,38 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class AgeCalculatorCommand extends Command
 {
     protected static $defaultName = 'app:age:calculator';
+    
+//    private $ageCalculatorManager;
+//
+//    /**
+//     * AgeCalculatorCommand constructor.
+//     */
+//    public function __construct(AgeCalculatorManager $ageCalculatorManager)
+//    {
+//        $this->ageCalculatorManager = $ageCalculatorManager;
+//    }
 
     protected function configure()
     {
         $this
-            ->setDescription('Add a short description for your command')
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->setDescription("Returns person is an adult or not")
+            ->addArgument('birthDate', InputArgument::REQUIRED, 'Birth date  (ex. 1985-03-25)')
         ;
     }
+    
+    
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
+        $birthDateString = $input->getArgument('birthDate');
+        
+        $io->note(sprintf('You passed an argument: %s', $birthDateString));
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
-
-        if ($input->getOption('option1')) {
-            // ...
-        }
-
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        //calculate stage
+//        
+//        $growthStage = $this->ageCalculatorManager->adultOrNot($birthDateString);
+//        $io->success(sprintf('You are: %s', $growthStage));
+            
     }
 }

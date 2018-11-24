@@ -1,0 +1,13 @@
+services:
+    app.age_calculator.age_calculator_manager:
+        class: App\AgeCalculator\AgeCalculatorManager
+        public: true
+        arguments:
+            - '@app.age_calculator.age_calculator'
+            - '@app.age_calculator.growth_teller'
+
+    app.age_calculator.age_calculator:
+        class: App\AgeCalculator\AgeCalculator
+
+    app.age_calculator.growth_teller:
+        class: App\AgeCalculator\GrowthTeller
