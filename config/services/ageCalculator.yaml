@@ -1,0 +1,7 @@
+parameters:
+
+services:
+  app.ageCalculator.ageCalculatorManager:
+    class: App\AgeCalculator\AgeCalculatorManager
+    public: true
+    arguments:

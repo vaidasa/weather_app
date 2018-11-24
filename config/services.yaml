@@ -36,7 +36,7 @@ services:
     App\Controller\WeatherController:
         bind:
             $loaderService: '@app.weather.loader_service'
-    
+
     App\AgeCalculator\AgeCalculatorManager:
         bind:
-            $ageCalculatorManager: '@app.age_calculator.age_calculator_manager'
+            $ageCalculatorMangerService: '@app.ageCalculator.ageCalculatorManager'
