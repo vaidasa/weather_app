@@ -2,13 +2,13 @@
 
 namespace App\Command;
 
-use App\AgeCalculator\AgeCalculatorManager;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+
 
 class AgeCalculatorCommand extends Command
 {
@@ -19,9 +19,9 @@ class AgeCalculatorCommand extends Command
     /**
      * AgeCalculatorCommand constructor.
      */
-    public function __construct(AgeCalculatorManager $ageCalculatorManager)
+    public function __construct(ContainerInterface $container)
     {
-        $this->ageCalculatorManager = $ageCalculatorManager;
+        $this->ageCalculatorManager = $container->get('app.age_calculator.age_calculator_manager');
         parent::__construct();
     }
 

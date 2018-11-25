@@ -18,7 +18,7 @@ class AgeCalculatorManager
         $this->growthTeller = $growthTeller;
     }
 
-    public function adultOrNot(string $birthDateString)
+    public function adultOrNot(string $birthDateString) : string
     {
         $birthDate = new \DateTime($birthDateString);
         
