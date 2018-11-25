@@ -5,15 +5,13 @@ namespace App\AgeCalculator;
 
 class AgeCalculator
 {
-
-    public function getAge(\DateTime $birthDate)
+    public function getAge(\DateTime $birthDate) : int
     {
         $now = new \DateTime('now');
         
-        $timeDiff = $now - $birthDate;
+        $dateDiff = date_diff($now, $birthDate);
         
-        return $timeDiff;
-        
+        return $dateDiff->y;
     }
 
 }

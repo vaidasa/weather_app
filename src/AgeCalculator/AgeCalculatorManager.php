@@ -20,12 +20,14 @@ class AgeCalculatorManager
 
     public function adultOrNot(string $birthDateString)
     {
-        $birthDate = \DateTime($birthDateString);
+        $birthDate = new \DateTime($birthDateString);
         
         $age = $this->ageCalculator->getAge($birthDate);
+       
         $growthStage = $this->growthTeller->getGrowthStage($age);
         
         return $growthStage;
+        
     }
     
 }

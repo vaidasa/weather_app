@@ -2,7 +2,6 @@
 
 namespace App\Command;
 
-use App\AgeCalculator\AgeCalculator;
 use App\AgeCalculator\AgeCalculatorManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,15 +14,16 @@ class AgeCalculatorCommand extends Command
 {
     protected static $defaultName = 'app:age:calculator';
     
-//    private $ageCalculatorManager;
-//
-//    /**
-//     * AgeCalculatorCommand constructor.
-//     */
-//    public function __construct(AgeCalculatorManager $ageCalculatorManager)
-//    {
-//        $this->ageCalculatorManager = $ageCalculatorManager;
-//    }
+    private $ageCalculatorManager;
+
+    /**
+     * AgeCalculatorCommand constructor.
+     */
+    public function __construct(AgeCalculatorManager $ageCalculatorManager)
+    {
+        $this->ageCalculatorManager = $ageCalculatorManager;
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -43,9 +43,9 @@ class AgeCalculatorCommand extends Command
         $io->note(sprintf('You passed an argument: %s', $birthDateString));
 
         //calculate stage
-//        
-//        $growthStage = $this->ageCalculatorManager->adultOrNot($birthDateString);
-//        $io->success(sprintf('You are: %s', $growthStage));
+        
+        $growthStage = $this->ageCalculatorManager->adultOrNot($birthDateString);
+        $io->success(sprintf('You are: %s', $growthStage));
             
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\AgeCalculator\AgeCalculatorManager;
 use App\Model\NullWeather;
 use App\Weather\LoaderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +15,7 @@ class WeatherController extends AbstractController
      * @param LoaderService $loaderService
      * @return Response
      */
-    public function index($day, LoaderService $loaderService): Response
+    public function index($day, LoaderService $loaderService, AgeCalculatorManager $ageCalculatorManager): Response
     {
         try {
             $weather = $loaderService->loadWeatherByDay(new \DateTime($day));
