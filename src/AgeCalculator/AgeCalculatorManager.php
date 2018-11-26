@@ -18,16 +18,15 @@ class AgeCalculatorManager
         $this->growthTeller = $growthTeller;
     }
 
-    public function adultOrNot(string $birthDateString) : string
+    public function getAge(string $birthDateString)
     {
-        $birthDate = new \DateTime($birthDateString);
-        
-        $age = $this->ageCalculator->getAge($birthDate);
-       
-        $growthStage = $this->growthTeller->getGrowthStage($age);
-        
-        return $growthStage;
-        
+        return $this->ageCalculator->getAge( new \DateTime($birthDateString));
     }
-    
+
+    public function isAdult(int $age) : bool
+    {
+        $adult = $this->growthTeller->isAdult($age);
+        
+        return $adult;
+    }
 }

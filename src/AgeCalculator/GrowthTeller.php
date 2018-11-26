@@ -5,11 +5,11 @@ namespace App\AgeCalculator;
 
 class GrowthTeller
 {
-    public function getGrowthStage(int $age)
+    public function isAdult(int $age) : bool
     {
         if ($age > 18)
-            return "Adult";
+            return true;
         else 
-            return "Kid";
+            return false;
     }
 }
